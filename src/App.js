@@ -8,6 +8,15 @@ import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 import AppMenu from "components/AppMenu";
+import {
+  Users,
+  Recipes,
+  HomePage,
+  QuickStart,
+  Restaurants,
+  UsersPremium,
+} from './containers';
+import { Route, Switch } from "react-router-dom";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -50,6 +59,14 @@ const App = () => {
       <main className={classes.content}>
         <Container maxWidth="lg" className={classes.container}>
           <Typography>I'm the content</Typography>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/recipes" component={Recipes} />
+            <Route exact path="/users" component={Users} />
+            <Route exact path="/quick_start" component={QuickStart} />
+            <Route exact path="/resaurants" component={Restaurants} />
+            <Route exact path="/premium_users" component={UsersPremium} />
+          </Switch>
         </Container>
       </main>
     </div>
