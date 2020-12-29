@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
@@ -6,6 +6,9 @@ import Drawer from "@material-ui/core/Drawer";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
+
+import Header from "components/Header";
+
 
 import AppMenu from "components/AppMenu";
 import {
@@ -40,14 +43,24 @@ const useStyles = makeStyles((theme) => ({
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4)
-  }
+  },
+  // necessary for content to be below app bar
+  toolbar: theme.mixins.toolbar,
+  drawer: {
+    [theme.breakpoints.up("sm")]: {
+      width: drawerWidth,
+      flexShrink: 0
+    }
+  },
 }));
+
+
 const App = () => {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <CssBaseline />
+      <Header />
       <Drawer
         variant="permanent"
         classes={{
@@ -57,8 +70,9 @@ const App = () => {
         <AppMenu />
       </Drawer>
       <main className={classes.content}>
+        <div className={classes.toolbar} />
+
         <Container maxWidth="lg" className={classes.container}>
-          <Typography>I'm the content</Typography>
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/recipes" component={Recipes} />
