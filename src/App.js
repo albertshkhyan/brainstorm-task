@@ -4,7 +4,6 @@ import Button from "@material-ui/core/Button";
 
 import Drawer from "@material-ui/core/Drawer";
 import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 import Header from "components/Header";

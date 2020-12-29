@@ -46,13 +46,7 @@ const Header = () => {
 	return (
 		<AppBar position="fixed" className={classes.appBar}>
 			<Toolbar>
-				<Box
-					width={1}
-					display="flex"
-					justifyContent="space-between"
-					flexDirection="row"
-					bgcolor="background.paper"
-				>
+				<Box width={1} display="flex" justifyContent="space-between">
 					<Box display="flex" justifyContent="center" alignItems="center">
 						<IconButton
 							color="inherit"
