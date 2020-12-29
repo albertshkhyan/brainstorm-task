@@ -4,10 +4,28 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { Provider } from 'react-redux';
+
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+import { BrowserRouter } from "react-router-dom";
+
+import theme from "theme";
+
+import store from './app/store';
+
+store.subscribe(() => {
+  window.state = store.getState();
+})
+
+console.log('store.getState()', store.getState());
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <MuiThemeProvider theme={theme}>
+        <App />
+      </MuiThemeProvider>
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root')
 );
 
