@@ -27,7 +27,7 @@ import SwitchButton from './SwitchButton';
 
 import Preloader from './Preloader';
 import { useDispatch, useSelector } from 'react-redux';
-import { sortingSG } from './../app/reducers/users';
+import { sortingSG, deleteUserSG } from 'app/reducers/users';
 
 const StyledTableCell = withStyles((theme) => ({
 	head: {
@@ -202,6 +202,11 @@ export default function EnhancedTable() {
 		setOrderBy(property);
 	};
 
+	const deleteUser = (userId) => {
+		console.log('userId', userId);
+		dispatch(deleteUserSG(userId));
+	};
+
 	const handleSelectAllClick = (event) => {
 		if (event.target.checked) {
 			const newSelecteds = usersData && usersData.map((n) => n.name);
@@ -300,7 +305,11 @@ export default function EnhancedTable() {
 														<SwitchButton row={row} disabled={row.disabled} />
 													</Box>
 													<Box display="flex" justifyContent="center" alignItems="center">
-														<IconButton aria-label="delete" className={classes.margin}>
+														<IconButton
+															onClick={() => deleteUser(row.id)}
+															aria-label="delete"
+															className={classes.margin}
+														>
 															<DeleteIcon style={{ color: 'red' }} />
 														</IconButton>
 													</Box>

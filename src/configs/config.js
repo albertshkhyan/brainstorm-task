@@ -12,6 +12,7 @@ export default {
             userUpadate: "users",
             userGetById: "users/",
             userDeleteById: "users/",
+            deleteUser: "users/",
 
         },
     },

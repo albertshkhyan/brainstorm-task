@@ -6,8 +6,10 @@ export const USERS_ACTIONS = {
     SET_IS_LOADING: "brainstorm-task/users/SET_IS_LOADING",
     SET_TOTOAL_PAGE_COUNT: "brainstorm-task/users/SET_TOTOAL_PAGE_COUNT",
     SET_CURRENT_PAGE: "brainstorm-task/users/SET_CURRENT_PAGE",
-    UPDATE_USER_SAGA: "brainstorm-task/users/UPDATE_USER_SAGA",
+    DELETE_USER: "brainstorm-task/users/DELETE_USER",
     //SAGA ACTIONS
+    UPDATE_USER_SAGA: "brainstorm-task/users/UPDATE_USER_SAGA",
+    DELETE_USER_SAGA: "brainstorm-task/users/DELETE_USER_SAGA",
     GET_ALL_USERS_SAGA: "brainstorm-task/users/GET_ALL_USERS_SAGA",
     SORTING_SAGA: "brainstorm-task/users/SORTING_SAGA",
     PAGINATE_SAGA: "brainstorm-task/users/PAGINATE_SAGA",

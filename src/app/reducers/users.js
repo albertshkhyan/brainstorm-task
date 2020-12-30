@@ -43,9 +43,6 @@ const usersReducer = createReducer(initialState, {
         }
     },
     [USERS_ACTIONS.UPDATE_USER](state, { payload }) {
-        console.log('payload COMEEEEEEEEEEEEEEEEEE', payload);
-        debugger
-
         return {
             ...state,
             users: state.users.map((item) => {
@@ -59,6 +56,13 @@ const usersReducer = createReducer(initialState, {
                 return item;
             })
         }
+    },
+    [USERS_ACTIONS.DELETE_USER](state, { userId }) {
+        // debugger
+        return {
+            ...state,
+            users: state.users.filter(({ id }) => id !== userId)
+        }
     }
 })
 
@@ -70,6 +74,10 @@ export const setUsersData = (payload) => ({
 export const updateUser = (payload) => ({
     type: USERS_ACTIONS.UPDATE_USER,
     payload
+});
+export const deleteUser = (userId) => ({
+    type: USERS_ACTIONS.DELETE_USER,
+    userId
 });
 export const setTotoalPageCount = (payload) => ({
     type: USERS_ACTIONS.SET_TOTOAL_PAGE_COUNT,
@@ -92,7 +100,7 @@ export const setCurrentPage = (payload) => ({
     payload
 });
 
-//Sagas calls
+//Sagas call actions
 export const getUsersSG = (page, limit) => ({
     type: USERS_ACTIONS.GET_ALL_USERS_SAGA,
 });
@@ -110,6 +118,12 @@ export const updateSG = (row, checked, setChecked) => {
         row,
         checked,
         setChecked
+    })
+};
+export const deleteUserSG = (userId) => {
+    return ({
+        type: USERS_ACTIONS.DELETE_USER_SAGA,
+        userId
     })
 };
 

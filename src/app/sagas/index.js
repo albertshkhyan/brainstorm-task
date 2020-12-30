@@ -3,6 +3,7 @@ import usersGetAllSaga from './usersGetAllSaga';
 import paginationSaga from './paginationSaga';
 import sortingSaga from './sortingSaga';
 import updateUserSaga from './updateUserSaga';
+import deleteUsersSaga from './deleteUsersSaga';
 
 export default function* rootSaga() {
     yield all([
@@ -10,5 +11,6 @@ export default function* rootSaga() {
         paginationSaga(),
         usersGetAllSaga(),
         updateUserSaga(),
+        deleteUsersSaga(),
     ])
 }

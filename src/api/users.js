@@ -46,7 +46,15 @@ const userAPI = {
         try {
             // const res = await axiosInstance.get(`${config.server.routes.usersGetAll}?_sort=${sort}&_order=${order}`);
             const res = await axiosInstance.patch(`${config.server.routes.toggleSwitch}/${userId}`, updatedBody);
-            console.log('res patchSwitchToggle appppppppppiiiiii', res);
+            return res;
+        } catch (error) {
+            console.log('error.response', error.response);
+            // throw new Error(error.response.data.errors[0].msg)
+        }
+    },
+    async deleteUser(userId) {
+        try {
+            const res = await axiosInstance.delete(`${config.server.routes.deleteUser}/${userId}`);
             return res;
         } catch (error) {
             console.log('error.response', error.response);
