@@ -66,14 +66,13 @@ export default function SwitchButton({ disabled = false }) {
 	console.log('checked', checked);
 
 	const handleChange = (event) => {
+		console.log('handleChange 111111111');
 		setChecked(event.target.checked);
 	};
 
 	return (
 		<FormGroup>
-			<FormControlLabel
-				control={<IOSSwitch disabled={disabled} checked={checked} onChange={handleChange} name="checked" />}
-			/>
+			<FormControlLabel control={<IOSSwitch checked={checked} onChange={handleChange} name="checked" />} />
 		</FormGroup>
 	);
 }

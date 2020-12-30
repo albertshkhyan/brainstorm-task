@@ -6,7 +6,8 @@ import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import UserTable from './../components/UserTable';
+import UserTable from 'components/UserTable';
+import Paginate from '../components/Paginate';
 
 const useStyles = makeStyles({
 	root: {
@@ -46,6 +47,9 @@ const Users = () => {
 				</Box>
 			</Box>
 			<UserTable />
+			<Box my={3}>
+				<Paginate />
+			</Box>
 		</div>
 	);
 };
