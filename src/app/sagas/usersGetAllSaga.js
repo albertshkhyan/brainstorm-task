@@ -25,7 +25,6 @@ function* userGetAllWorker(action) {
 
 
     } catch (error) {
-        console.log('error', error);
         console.log('error.response', error.response);
 
     }

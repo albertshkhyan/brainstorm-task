@@ -13,6 +13,7 @@ import AppMenu from "components/AppMenu";
 import {
   Users,
   Recipes,
+  NewUser,
   HomePage,
   QuickStart,
   Restaurants,
@@ -79,6 +80,7 @@ const App = () => {
             <Route exact path="/quick_start" component={QuickStart} />
             <Route exact path="/resaurants" component={Restaurants} />
             <Route exact path="/premium_users" component={UsersPremium} />
+            <Route exact path="/new_user" component={NewUser} />
           </Switch>
         </Container>
       </main>

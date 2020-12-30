@@ -8,10 +8,12 @@ export default {
             usersGetByPaginate: "users?",//_page=1&_limit=10
             usersGetAll: "users",
             toggleSwitch: "users",
+            createUser: "users",
             userCreate: "users",
             userUpadate: "users",
             userGetById: "users/",
             userDeleteById: "users/",
+            uploadImage: "images",
             deleteUser: "users/",
 
         },

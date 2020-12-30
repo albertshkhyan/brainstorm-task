@@ -13,4 +13,11 @@ export const USERS_ACTIONS = {
     GET_ALL_USERS_SAGA: "brainstorm-task/users/GET_ALL_USERS_SAGA",
     SORTING_SAGA: "brainstorm-task/users/SORTING_SAGA",
     PAGINATE_SAGA: "brainstorm-task/users/PAGINATE_SAGA",
+    CREATE_USER_SAGA: "brainstorm-task/users/CREATE_USER_SAGA",
+    SET_CREATED_USER_DATA: "brainstorm-task/users/SET_CREATED_USER_DATA",
+
+}
+
+export const FILE_ACTIONS = {
+
 }

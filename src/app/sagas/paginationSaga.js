@@ -14,19 +14,11 @@ function* paginationWorker({ page, limit }) {
         // yield put(setTotoalPageCount(totalPages));
         yield put(setUsersData(usersData));
         yield put(setCurrentPage(page));
-        //
         yield put(setIsLoading(false))
-
-
-
     } catch (error) {
-        console.log('error', error);
         console.log('error.response', error.response);
-
     }
-
 }
-
 function* paginationWatcher() {
     yield takeEvery(USERS_ACTIONS.PAGINATE_SAGA, paginationWorker);
 }

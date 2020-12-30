@@ -42,7 +42,6 @@ const userAPI = {
     },
 
     async patchSwitchToggle(userId, updatedBody) {
-        console.log('updatedBody', updatedBody);
         try {
             // const res = await axiosInstance.get(`${config.server.routes.usersGetAll}?_sort=${sort}&_order=${order}`);
             const res = await axiosInstance.patch(`${config.server.routes.toggleSwitch}/${userId}`, updatedBody);
@@ -55,6 +54,30 @@ const userAPI = {
     async deleteUser(userId) {
         try {
             const res = await axiosInstance.delete(`${config.server.routes.deleteUser}/${userId}`);
+            return res;
+        } catch (error) {
+            console.log('error.response', error.response);
+            // throw new Error(error.response.data.errors[0].msg)
+        }
+    },
+    async createUser(userbody) {
+        try {
+            const res = await axiosInstance.post(`${config.server.routes.createUser}`, userbody);
+            return res;
+        } catch (error) {
+            console.log('error.response', error.response);
+            // throw new Error(error.response.data.errors[0].msg)
+        }
+    },
+    async uploadImage(fileData) {
+        const formData = new FormData();
+        const reqConfig = {
+            headers: {
+                'content-type': 'multipart/form-data',
+            },
+        };
+        try {
+            const res = await axiosInstance.post(`${config.server.routes.uploadImage}`, formData, reqConfig);
             return res;
         } catch (error) {
             console.log('error.response', error.response);

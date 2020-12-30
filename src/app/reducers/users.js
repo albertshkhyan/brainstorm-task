@@ -18,6 +18,12 @@ const usersReducer = createReducer(initialState, {
             users: [...payload]
         }
     },
+    [USERS_ACTIONS.SET_CREATED_USER_DATA](state, { payload }) {
+        return {
+            ...state,
+            users: [...state.users, payload]
+        }
+    },
     [USERS_ACTIONS.SET_TOTOAL_COUNT](state, { payload }) {
         return {
             ...state,
@@ -69,6 +75,10 @@ const usersReducer = createReducer(initialState, {
 //action creators
 export const setUsersData = (payload) => ({
     type: USERS_ACTIONS.SET_ALL_USERS,
+    payload
+});
+export const setCreatedUserData = (payload) => ({
+    type: USERS_ACTIONS.SET_CREATED_USER_DATA,
     payload
 });
 export const updateUser = (payload) => ({
@@ -126,5 +136,10 @@ export const deleteUserSG = (userId) => {
         userId
     })
 };
+export const createUserSG = (userBody, fileData) => ({
+    type: USERS_ACTIONS.CREATE_USER_SAGA,
+    userBody,
+    fileData
+});
 
 export default usersReducer;

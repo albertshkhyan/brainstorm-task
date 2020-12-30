@@ -4,11 +4,9 @@ import { USERS_ACTIONS } from "configs/types";
 
 
 import userAPI from 'api/users';
-import { setUsersData, setCurrentPage, setIsLoading, updateUser, deleteUser, setTotoalCount } from '../reducers/users';
+import { setCurrentPage, setIsLoading, updateUser, deleteUser, setTotoalCount } from '../reducers/users';
 
 function* deleteUserWorker({ userId }) {
-    console.log('deleteUserWorker 📞📞📞📞');
-    // console.log('updatedBody in saga33333333333333333', updatedBody);
     try {
         yield put(setIsLoading(true));
         const { data } = yield call(userAPI.deleteUser, userId);
@@ -21,7 +19,6 @@ function* deleteUserWorker({ userId }) {
         yield put(setIsLoading(false));
 
     } catch (error) {
-        console.log('error', error);
         console.log('error.response', error.response);
 
     }

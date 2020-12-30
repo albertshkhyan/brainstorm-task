@@ -12,45 +12,33 @@ import useOnce from './../utils/use-once';
 import { useDispatch } from 'react-redux';
 import { getUsersSG } from '../app/reducers/users';
 import { useHistory } from 'react-router-dom';
-import TitleDivider from './../components/TitleDivider';
 
 const useStyles = makeStyles({
-	btn: {
-		minWidth: '100px',
+	divider: {
+		width: '100%',
+		background: 'black',
+		height: '1px',
+	},
+	Typography: {
+		minWidth: '93px',
 	},
 });
 
-const Users = () => {
+const TitleDivider = ({ title }) => {
 	const classes = useStyles();
-	const dispatch = useDispatch();
-	const history = useHistory();
 
-	useOnce(() => {
-		// getUsers;
-		dispatch(getUsersSG());
-	});
-
-	const addUserHandler = () => {
-		return history.push('/new_user');
-	};
 	return (
-		<div className={classes.root}>
-			<Box my={3}>
-				<Box width={1} display="flex" justifyContent="space-between">
-					<TitleDivider title="Users" />
-					<Box>
-						<Button onClick={addUserHandler} className={classes.btn} variant="contained" color="secondary">
-							Add user
-						</Button>
-					</Box>
-				</Box>
+		<>
+			<Box display="flex" justifyContent="center" alignItems="center">
+				<Typography className={classes.Typography} variant="h6" gutterBottom>
+					{title}
+				</Typography>
 			</Box>
-			<UserTable />
-			<Box my={3}>
-				<Paginate />
+			<Box px="15px" width={1} display="flex" justifyContent="center" alignItems="center">
+				<div className={classes.divider}></div>
 			</Box>
-		</div>
+		</>
 	);
 };
 
-export default Users;
+export default TitleDivider;

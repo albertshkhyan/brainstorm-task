@@ -60,12 +60,6 @@ export default function UserTable() {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 
-	const switchToggle = (row) => {
-		console.log('row.id', row.id);
-		// updateSG
-		// dispatch(updateSG());
-	};
-
 	return (
 		<TableContainer component={Paper}>
 			<Table className={classes.table} aria-label="customized table">
