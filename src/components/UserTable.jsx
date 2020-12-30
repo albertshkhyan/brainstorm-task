@@ -26,7 +26,8 @@ import Box from '@material-ui/core/Box';
 import SwitchButton from './SwitchButton';
 
 import Preloader from './Preloader';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { sortingSG } from './../app/reducers/users';
 
 const StyledTableCell = withStyles((theme) => ({
 	head: {
@@ -88,8 +89,8 @@ const headCells = [
 	{ id: 'photo', numeric: false, disablePadding: true, label: 'Photo' },
 	{ id: 'name', numeric: false, disablePadding: false, label: 'Name' },
 	{ id: 'location', numeric: false, disablePadding: false, label: 'Location' },
-	{ id: 'registerd_date', numeric: true, disablePadding: false, label: 'Registerd date' },
-	{ id: 'last_active_date', numeric: false, disablePadding: false, label: 'Last active date' },
+	{ id: 'registeredDate', numeric: true, disablePadding: false, label: 'Registerd date' },
+	{ id: 'lastActiveDate', numeric: false, disablePadding: false, label: 'Last active date' },
 	{ id: 'email', numeric: false, disablePadding: false, label: 'Email' },
 	{ id: 'action', numeric: false, disablePadding: false, label: 'Action' },
 ];
@@ -148,67 +149,6 @@ EnhancedTableHead.propTypes = {
 	rowCount: PropTypes.number.isRequired,
 };
 
-// const useToolbarStyles = makeStyles((theme) => ({
-// 	root: {
-// 		paddingLeft: theme.spacing(2),
-// 		paddingRight: theme.spacing(1),
-// 	},
-// 	highlight:
-// 		theme.palette.type === 'light'
-// 			? {
-// 					color: theme.palette.secondary.main,
-// 					backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-// 			  }
-// 			: {
-// 					color: theme.palette.text.primary,
-// 					backgroundColor: theme.palette.secondary.dark,
-// 			  },
-// 	title: {
-// 		flex: '1 1 100%',
-// 	},
-// }));
-
-// const EnhancedTableToolbar = (props) => {
-//   const classes = useToolbarStyles();
-//   const { numSelected } = props;
-
-//   return (
-//     <Toolbar
-//       className={clsx(classes.root, {
-//         [classes.highlight]: numSelected > 0,
-//       })}
-//     >
-//       {numSelected > 0 ? (
-//         <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
-//           {numSelected} selected
-//         </Typography>
-//       ) : (
-//         <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-//           Nutrition
-//         </Typography>
-//       )}
-
-//       {numSelected > 0 ? (
-//         <Tooltip title="Delete">
-//           <IconButton aria-label="delete">
-//             <DeleteIcon />
-//           </IconButton>
-//         </Tooltip>
-//       ) : (
-//         <Tooltip title="Filter list">
-//           <IconButton aria-label="filter list">
-//             <FilterListIcon />
-//           </IconButton>
-//         </Tooltip>
-//       )}
-//     </Toolbar>
-//   );
-// };
-
-// EnhancedTableToolbar.propTypes = {
-//   numSelected: PropTypes.number.isRequired,
-// };
-
 const useStyles = makeStyles((theme) => ({
 	root: {
 		width: '100%',
@@ -236,10 +176,12 @@ const useStyles = makeStyles((theme) => ({
 export default function EnhancedTable() {
 	const classes = useStyles();
 	const [order, setOrder] = React.useState('asc');
-	const [orderBy, setOrderBy] = React.useState('calories');
+	const [orderBy, setOrderBy] = React.useState('name');
 	const [selected, setSelected] = React.useState([]);
 
-	const usersData = useSelector((state) => state.users.data);
+	const dispatch = useDispatch();
+
+	const usersData = useSelector((state) => state.users.users);
 	const isLoading = useSelector((state) => state.users.isLoading);
 
 	// const [page, setPage] = React.useState(0);
@@ -248,6 +190,14 @@ export default function EnhancedTable() {
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === 'asc';
+		console.log('property', property);
+		// console.log('orderBy', orderBy);
+		if (property === 'action') {
+			return;
+		}
+		// console.log('order', order);
+		// console.log('isAsc 8888888888888888', isAsc);
+		dispatch(sortingSG(property, order)); //sort, order
 		setOrder(isAsc ? 'desc' : 'asc');
 		setOrderBy(property);
 	};
@@ -278,22 +228,7 @@ export default function EnhancedTable() {
 		setSelected(newSelected);
 	};
 
-	// const handleChangePage = (event, newPage) => {
-	// 	setPage(newPage);
-	// };
-
-	// const handleChangeRowsPerPage = (event) => {
-	// 	setRowsPerPage(parseInt(event.target.value, 10));
-	// 	setPage(0);
-	// };
-
-	// const handleChangeDense = (event) => {
-	// 	setDense(event.target.checked);
-	// };
-
 	const isSelected = (name) => selected.indexOf(name) !== -1;
-
-	// const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
 	return (
 		<div className={classes.root}>
@@ -362,7 +297,7 @@ export default function EnhancedTable() {
 												{' '}
 												<Box width={1} display="flex" justifyContent="space-between">
 													<Box display="flex" justifyContent="center" alignItems="center">
-														<SwitchButton disabled={row.disabled} />
+														<SwitchButton row={row} disabled={row.disabled} />
 													</Box>
 													<Box display="flex" justifyContent="center" alignItems="center">
 														<IconButton aria-label="delete" className={classes.margin}>

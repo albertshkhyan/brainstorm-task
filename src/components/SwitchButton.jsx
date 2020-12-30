@@ -6,6 +6,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import { useDispatch } from 'react-redux';
+import { updateSG } from './../app/reducers/users';
+console.log('updateSG', updateSG);
 
 const IOSSwitch = withStyles((theme) => ({
 	root: {
@@ -37,11 +40,22 @@ const IOSSwitch = withStyles((theme) => ({
 	track: {
 		borderRadius: 26 / 2,
 		border: `1px solid ${theme.palette.grey[400]}`,
-		backgroundColor: '#52d869',
+		backgroundColor: 'red',
 		opacity: 1,
 		transition: theme.transitions.create(['background-color', 'border']),
 	},
-	checked: {},
+	checked: {
+		padding: 1,
+		'&$checked': {
+			transform: 'translateX(16px)',
+			color: theme.palette.common.white,
+			'& + $track': {
+				backgroundColor: '#52d869',
+				opacity: 1,
+				border: 'none',
+			},
+		},
+	},
 	focusVisible: {},
 }))(({ classes, ...props }) => {
 	return (
@@ -60,13 +74,24 @@ const IOSSwitch = withStyles((theme) => ({
 	);
 });
 
-export default function SwitchButton({ disabled = false }) {
+export default function SwitchButton({ row, disabled = false }) {
+	// console.log('disabled', disabled);
 	const [checked, setChecked] = React.useState(disabled);
+	// console.log('checked', checked);
+	const dispatch = useDispatch();
 
 	const handleChange = (event) => {
-		setChecked(event.target.checked);
+		event.preventDefault();
+		// console.log('event.target.checked', event.target.checked);
+		// setChecked(event.target.checked);
+		// const updatedBody = {
+		// 	...row,
+		// 	disabled: checked,
+		// };
+		// console.log('checked', checked);
+		// console.log('updatedBody in saga2222222222222', updatedBody);
+		dispatch(updateSG(row, event.target.checked, (checked) => setChecked(checked)));
 	};
-
 	return (
 		<FormGroup>
 			<FormControlLabel control={<IOSSwitch checked={checked} onChange={handleChange} name="checked" />} />

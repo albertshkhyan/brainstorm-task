@@ -7,6 +7,7 @@ export default {
         routes: {
             usersGetByPaginate: "users?",//_page=1&_limit=10
             usersGetAll: "users",
+            toggleSwitch: "users",
             userCreate: "users",
             userUpadate: "users",
             userGetById: "users/",

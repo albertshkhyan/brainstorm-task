@@ -8,13 +8,14 @@ const initialState = {
     totalCount: 0,
     totalPages: 0,
     currentPage: 1,
-    isLoading: false
+    isLoading: false,
+    isDisabled: false
 };
 const usersReducer = createReducer(initialState, {
     [USERS_ACTIONS.SET_ALL_USERS](state, { payload }) {
         return {
             ...state,
-            data: [...payload]
+            users: [...payload]
         }
     },
     [USERS_ACTIONS.SET_TOTOAL_COUNT](state, { payload }) {
@@ -41,11 +42,33 @@ const usersReducer = createReducer(initialState, {
             currentPage: payload
         }
     },
-});
+    [USERS_ACTIONS.UPDATE_USER](state, { payload }) {
+        console.log('payload COMEEEEEEEEEEEEEEEEEE', payload);
+        debugger
+
+        return {
+            ...state,
+            users: state.users.map((item) => {
+                debugger
+                if (item.id === payload.id) {
+                    return ({
+                        ...item,
+                        ...payload
+                    })
+                }
+                return item;
+            })
+        }
+    }
+})
 
 //action creators
 export const setUsersData = (payload) => ({
     type: USERS_ACTIONS.SET_ALL_USERS,
+    payload
+});
+export const updateUser = (payload) => ({
+    type: USERS_ACTIONS.UPDATE_USER,
     payload
 });
 export const setTotoalPageCount = (payload) => ({
@@ -69,6 +92,7 @@ export const setCurrentPage = (payload) => ({
     payload
 });
 
+//Sagas calls
 export const getUsersSG = (page, limit) => ({
     type: USERS_ACTIONS.GET_ALL_USERS_SAGA,
 });
@@ -76,5 +100,17 @@ export const paginateSG = (page, limit) => ({
     type: USERS_ACTIONS.PAGINATE_SAGA,
     page, limit
 });
+export const sortingSG = (sort, order) => ({
+    type: USERS_ACTIONS.SORTING_SAGA,
+    sort, order
+});
+export const updateSG = (row, checked, setChecked) => {
+    return ({
+        type: USERS_ACTIONS.UPDATE_USER_SAGA,
+        row,
+        checked,
+        setChecked
+    })
+};
 
 export default usersReducer;

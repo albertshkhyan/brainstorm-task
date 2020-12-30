@@ -14,6 +14,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Box from '@material-ui/core/Box';
 
 import SwitchButton from './SwitchButton';
+import { useDispatch } from 'react-redux';
 
 const StyledTableCell = withStyles((theme) => ({
 	head: {
@@ -57,6 +58,13 @@ const useStyles = makeStyles({
 
 export default function UserTable() {
 	const classes = useStyles();
+	const dispatch = useDispatch();
+
+	const switchToggle = (row) => {
+		console.log('row.id', row.id);
+		// updateSG
+		// dispatch(updateSG());
+	};
 
 	return (
 		<TableContainer component={Paper}>
@@ -86,7 +94,7 @@ export default function UserTable() {
 							<StyledTableCell align="center">
 								<Box width={1} display="flex" justifyContent="space-between">
 									<Box display="flex" justifyContent="center" alignItems="center">
-										<SwitchButton disabled={row.disabled} />
+										<SwitchButton onClick={() => switchToggle(row)} disabled={row.disabled} />
 									</Box>
 									<Box display="flex" justifyContent="center" alignItems="center">
 										<IconButton aria-label="delete" className={classes.margin}>
