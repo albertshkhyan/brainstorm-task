@@ -13,7 +13,7 @@ function* userGetAllWorker(action) {
         yield put(setIsLoading(true));
         const { data: allUsers } = yield call(userAPI.getAllUsers);
         const { data: usersData } = yield call(userAPI.getUsers);
-        const totalCount = allUsers.length + 1;
+        const totalCount = allUsers.length;
         yield put(setTotoalCount(totalCount));
         let totalPages = yield Math.ceil(totalCount / limitItems);//always math.ceil 
         yield put(setTotoalPageCount(totalPages));

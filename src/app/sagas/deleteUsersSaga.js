@@ -4,7 +4,7 @@ import { USERS_ACTIONS } from "configs/types";
 
 
 import userAPI from 'api/users';
-import { setUsersData, setCurrentPage, setIsLoading, updateUser, deleteUser } from '../reducers/users';
+import { setUsersData, setCurrentPage, setIsLoading, updateUser, deleteUser, setTotoalCount } from '../reducers/users';
 
 function* deleteUserWorker({ userId }) {
     console.log('deleteUserWorker 📞📞📞📞');
@@ -14,7 +14,10 @@ function* deleteUserWorker({ userId }) {
         const { data } = yield call(userAPI.deleteUser, userId);
         // console.log('data', data);//no have response😭
         yield put(deleteUser(userId));
-
+        //#re calucation totol count of users after delete user
+        const { data: allUsers } = yield call(userAPI.getAllUsers);
+        const totalCount = allUsers.length;
+        yield put(setTotoalCount(totalCount));
         yield put(setIsLoading(false));
 
     } catch (error) {
