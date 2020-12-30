@@ -26,9 +26,6 @@ const AppMenuItem = (props) => {
 	const { name, Icon, link, items = [] } = props;
 	let history = useHistory();
 
-	console.log('link', link);
-	// console.log('name', name);
-	// console.log('items', items);
 	const classes = useStyles();
 	const isExpandable = items && items.length > 0;
 	const [open, setOpen] = React.useState(false);

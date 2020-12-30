@@ -51,18 +51,8 @@ const appMenuItems = [
 
 const AppMenu = () => {
 	const classes = useStyles();
-
-	const foo = () => {
-		// const ma = appMenuItems.map((item) => {
-		// 	console.log('item.link', item.link);
-		// 	return item;
-		// });
-		const fa = appMenuItems.filter((item) => item.link);
-		console.log('fa', fa);
-	};
 	return (
 		<List component="nav" className={classes.appMenu} disablePadding>
-			{/* {foo()} */}
 			{appMenuItems.map((item, index) => (
 				<AppMenuItem {...item} key={index} />
 			))}

@@ -44,7 +44,6 @@ const IOSSwitch = withStyles((theme) => ({
 	checked: {},
 	focusVisible: {},
 }))(({ classes, ...props }) => {
-	console.log('props', props);
 	return (
 		<Switch
 			focusVisibleClassName={classes.focusVisible}
@@ -63,10 +62,8 @@ const IOSSwitch = withStyles((theme) => ({
 
 export default function SwitchButton({ disabled = false }) {
 	const [checked, setChecked] = React.useState(disabled);
-	console.log('checked', checked);
 
 	const handleChange = (event) => {
-		console.log('handleChange 111111111');
 		setChecked(event.target.checked);
 	};
 

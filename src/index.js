@@ -17,7 +17,6 @@ store.subscribe(() => {
   window.state = store.getState();
 })
 
-console.log('store.getState()', store.getState());
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>

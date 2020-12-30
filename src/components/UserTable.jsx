@@ -25,7 +25,8 @@ import Box from '@material-ui/core/Box';
 
 import SwitchButton from './SwitchButton';
 
-import userData from './userData';
+import Preloader from './Preloader';
+import { useSelector } from 'react-redux';
 
 const StyledTableCell = withStyles((theme) => ({
 	head: {
@@ -237,6 +238,10 @@ export default function EnhancedTable() {
 	const [order, setOrder] = React.useState('asc');
 	const [orderBy, setOrderBy] = React.useState('calories');
 	const [selected, setSelected] = React.useState([]);
+
+	const usersData = useSelector((state) => state.users.data);
+	const isLoading = useSelector((state) => state.users.isLoading);
+
 	// const [page, setPage] = React.useState(0);
 	// const [dense, setDense] = React.useState(false);
 	// const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -249,7 +254,7 @@ export default function EnhancedTable() {
 
 	const handleSelectAllClick = (event) => {
 		if (event.target.checked) {
-			const newSelecteds = userData.map((n) => n.name);
+			const newSelecteds = usersData && usersData.map((n) => n.name);
 			setSelected(newSelecteds);
 			return;
 		}
@@ -308,13 +313,24 @@ export default function EnhancedTable() {
 							orderBy={orderBy}
 							onSelectAllClick={handleSelectAllClick}
 							onRequestSort={handleRequestSort}
-							rowCount={userData.length}
+							rowCount={10}
 						/>
 						<TableBody>
-							{/* {stableSort(userData, getComparator(order, orderBy)) */}
-							{userData
-								// .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-								.map((row, index) => {
+							{/* {stableSort(usersData, getComparator(order, orderBy)) */}
+
+							{isLoading && (
+								<TableRow align="center">
+									<TableCell rowSpan={4} colSpan={10} align="center">
+										<Box display="flex" justifyContent="center" my={3}>
+											<Preloader />
+										</Box>
+									</TableCell>
+								</TableRow>
+							)}
+
+							{!isLoading &&
+								usersData &&
+								usersData.map((row, index) => {
 									const isItemSelected = isSelected(row.name);
 									const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -324,7 +340,7 @@ export default function EnhancedTable() {
 											role="checkbox"
 											aria-checked={isItemSelected}
 											tabIndex={-1}
-											key={row.name}
+											key={row.id}
 											selected={isItemSelected}
 										>
 											<TableCell padding="checkbox">

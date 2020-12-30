@@ -33,7 +33,6 @@ export default function SearchBar() {
 	const [values, setValues] = React.useState({
 		search: '',
 	});
-	console.log(values);
 
 	const handleChange = (prop) => (event) => {
 		setValues({ ...values, [prop]: event.target.value });

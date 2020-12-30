@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -8,6 +8,9 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import UserTable from 'components/UserTable';
 import Paginate from '../components/Paginate';
+import useOnce from './../utils/use-once';
+import { useDispatch } from 'react-redux';
+import { getUsersSG } from '../app/reducers/users';
 
 const useStyles = makeStyles({
 	root: {
@@ -26,7 +29,12 @@ const useStyles = makeStyles({
 
 const Users = () => {
 	const classes = useStyles();
+	const dispatch = useDispatch();
 
+	useOnce(() => {
+		// getUsers;
+		dispatch(getUsersSG());
+	});
 	return (
 		<div className={classes.root}>
 			<Box my={3}>

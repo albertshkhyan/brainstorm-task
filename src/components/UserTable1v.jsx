@@ -13,7 +13,6 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Box from '@material-ui/core/Box';
 
-import userData from './userData';
 import SwitchButton from './SwitchButton';
 
 const StyledTableCell = withStyles((theme) => ({
@@ -74,7 +73,7 @@ export default function UserTable() {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{userData.map((row) => (
+					{usersData.map((row) => (
 						<TableRow key={row.id}>
 							<StyledTableCell component="th" scope="row">
 								<Avatar alt="avatar" src={row.photo} />
