@@ -15,9 +15,6 @@ export const USERS_ACTIONS = {
     PAGINATE_SAGA: "brainstorm-task/users/PAGINATE_SAGA",
     CREATE_USER_SAGA: "brainstorm-task/users/CREATE_USER_SAGA",
     SET_CREATED_USER_DATA: "brainstorm-task/users/SET_CREATED_USER_DATA",
-
-}
-
-export const FILE_ACTIONS = {
+    EDIT_USER_SAGA: "brainstorm-task/users/EDIT_USER_SAGA",
 
 }

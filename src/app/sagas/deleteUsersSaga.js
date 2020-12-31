@@ -4,7 +4,7 @@ import { USERS_ACTIONS } from "configs/types";
 
 
 import userAPI from 'api/users';
-import { setCurrentPage, setIsLoading, updateUser, deleteUser, setTotoalCount } from '../reducers/users';
+import { setIsLoading, deleteUser, setTotoalCount } from '../reducers/users';
 
 function* deleteUserWorker({ userId }) {
     try {

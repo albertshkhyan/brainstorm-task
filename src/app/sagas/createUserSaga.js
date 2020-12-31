@@ -10,7 +10,7 @@ function* createUserWorker({ userBody, fileData }) {
 
         if (fileData) {
             const res = yield call(userAPI.uploadImage, fileData);
-            // console.log('res', res);//{}
+            console.log('uploadImage res', res);//{}
         }
         const res = yield call(userAPI.createUser, userBody);
         if (res.status === 201) {

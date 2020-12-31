@@ -13,6 +13,7 @@ export default {
             userUpadate: "users",
             userGetById: "users/",
             userDeleteById: "users/",
+            editUser: "users/",
             uploadImage: "images",
             deleteUser: "users/",
 

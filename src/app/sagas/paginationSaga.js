@@ -8,7 +8,6 @@ import { setUsersData, setCurrentPage, setIsLoading } from './../reducers/users'
 
 function* paginationWorker({ page, limit }) {
     try {
-
         yield put(setIsLoading(true));
         const { data: usersData } = yield call(userAPI.getUsers, page, limit);
         // yield put(setTotoalPageCount(totalPages));

@@ -10,8 +10,9 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import PhotoIcon from '@material-ui/icons/Photo';
 
+import { useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { createUserSG } from './../app/reducers/users';
+import { createUserSG, editUserSG } from './../app/reducers/users';
 import { useDispatch, useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
@@ -50,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 export default function UserForm() {
 	const classes = useStyles();
 	const isLoading = useSelector((state) => state.users.isLoading);
+	let { userId } = useParams();
 
 	const dispatch = useDispatch();
 
@@ -67,7 +69,13 @@ export default function UserForm() {
 				values: { name: '', email: '', location: '' },
 			});
 			setFileData(null);
-			dispatch(createUserSG(values, fileData));
+			if (!userId) {
+				//# check on whcih page now - create page
+				dispatch(createUserSG(values, fileData));
+			} else {
+				//# edit page
+				dispatch(editUserSG(userId, values, fileData));
+			}
 		},
 	});
 

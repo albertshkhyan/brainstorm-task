@@ -14,6 +14,7 @@ import {
   Users,
   Recipes,
   NewUser,
+  UserEdit,
   HomePage,
   QuickStart,
   Restaurants,
@@ -81,6 +82,7 @@ const App = () => {
             <Route exact path="/resaurants" component={Restaurants} />
             <Route exact path="/premium_users" component={UsersPremium} />
             <Route exact path="/new_user" component={NewUser} />
+            <Route exact path="/edit_user/:userId" component={UserEdit} />
           </Switch>
         </Container>
       </main>

@@ -53,7 +53,7 @@ const userAPI = {
     },
     async deleteUser(userId) {
         try {
-            const res = await axiosInstance.delete(`${config.server.routes.deleteUser}/${userId}`);
+            const res = await axiosInstance.delete(`${config.server.routes.deleteUser}${userId}`);
             return res;
         } catch (error) {
             console.log('error.response', error.response);
@@ -63,6 +63,15 @@ const userAPI = {
     async createUser(userbody) {
         try {
             const res = await axiosInstance.post(`${config.server.routes.createUser}`, userbody);
+            return res;
+        } catch (error) {
+            console.log('error.response', error.response);
+            // throw new Error(error.response.data.errors[0].msg)
+        }
+    },
+    async editUser(userId, userbody) {
+        try {
+            const res = await axiosInstance.put(`${config.server.routes.editUser}${userId}`, userbody);
             return res;
         } catch (error) {
             console.log('error.response', error.response);

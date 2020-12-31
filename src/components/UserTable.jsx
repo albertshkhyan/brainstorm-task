@@ -15,8 +15,9 @@ import TableHead from '@material-ui/core/TableHead';
 import IconButton from '@material-ui/core/IconButton';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import TablePagination from '@material-ui/core/TablePagination';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+
+import { useHistory } from 'react-router-dom';
 
 import SwitchButton from './SwitchButton';
 import Preloader from './Preloader';
@@ -153,6 +154,11 @@ export default function EnhancedTable() {
 	const [order, setOrder] = React.useState('asc');
 	const [orderBy, setOrderBy] = React.useState('name');
 	const [selected, setSelected] = React.useState([]);
+	let history = useHistory();
+
+	const handleRowClick = (userId) => {
+		history.push(`/edit_user/${userId}`);
+	};
 
 	const dispatch = useDispatch();
 
@@ -169,7 +175,8 @@ export default function EnhancedTable() {
 		setOrderBy(property);
 	};
 
-	const deleteUser = (userId) => {
+	const deleteUser = (event, userId) => {
+		event.stopPropagation(); //add for not change route (work handleRowClick)
 		dispatch(deleteUserSG(userId));
 	};
 
@@ -242,6 +249,7 @@ export default function EnhancedTable() {
 
 									return (
 										<TableRow
+											onClick={(event) => handleRowClick(row.id)}
 											hover
 											role="checkbox"
 											aria-checked={isItemSelected}
@@ -272,7 +280,7 @@ export default function EnhancedTable() {
 													</Box>
 													<Box display="flex" justifyContent="center" alignItems="center">
 														<IconButton
-															onClick={() => deleteUser(row.id)}
+															onClick={(event) => deleteUser(event, row.id)}
 															aria-label="delete"
 															className={classes.margin}
 														>

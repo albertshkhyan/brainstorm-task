@@ -141,5 +141,11 @@ export const createUserSG = (userBody, fileData) => ({
     userBody,
     fileData
 });
+export const editUserSG = (userId, userBody, fileData) => ({
+    type: USERS_ACTIONS.EDIT_USER_SAGA,
+    userId,
+    userBody,
+    fileData
+});
 
 export default usersReducer;

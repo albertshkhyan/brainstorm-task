@@ -18,15 +18,10 @@ function* userGetAllWorker(action) {
         let totalPages = yield Math.ceil(totalCount / limitItems);//always math.ceil 
         yield put(setTotoalPageCount(totalPages));
         yield put(setUsersData(usersData));
-        //
-        // setTotoalPageCount
         yield put(setIsLoading(false))
-
-
 
     } catch (error) {
         console.log('error.response', error.response);
-
     }
 
 }
