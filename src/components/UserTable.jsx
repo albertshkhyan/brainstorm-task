@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -156,7 +156,10 @@ export default function EnhancedTable() {
 	const [selected, setSelected] = React.useState([]);
 	let history = useHistory();
 
-	const handleRowClick = (userId) => {
+	const handleRowClick = (event, userId) => {
+		if (event.target.type === 'checkbox') {
+			return;
+		}
 		history.push(`/edit_user/${userId}`);
 	};
 
@@ -249,7 +252,7 @@ export default function EnhancedTable() {
 
 									return (
 										<TableRow
-											onClick={(event) => handleRowClick(row.id)}
+											onClick={(event) => handleRowClick(event, row.id)}
 											hover
 											role="checkbox"
 											aria-checked={isItemSelected}
@@ -292,25 +295,10 @@ export default function EnhancedTable() {
 										</TableRow>
 									);
 								})}
-							{/* {emptyRows > 0 && (
-								<TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-									<TableCell colSpan={6} />
-								</TableRow>
-							)} */}
 						</TableBody>
 					</Table>
 				</TableContainer>
-				{/* <TablePagination
-					rowsPerPageOptions={[5, 10, 25]}
-					component="div"
-					count={rows.length}
-					rowsPerPage={rowsPerPage}
-					page={page}
-					onChangePage={handleChangePage}
-					onChangeRowsPerPage={handleChangeRowsPerPage}
-				/> */}
 			</Paper>
-			{/* <FormControlLabel control={<Switch checked={dense} onChange={handleChangeDense} />} label="Dense padding" /> */}
 		</div>
 	);
 }

@@ -76,6 +76,7 @@ export default function SwitchButton({ row, disabled = false }) {
 	const dispatch = useDispatch();
 
 	const handleChange = (event) => {
+		// event.stopPropagation(); //not work in handleRowClick add -> event.target === event.currentTarget
 		event.preventDefault();
 		dispatch(updateSG(row, event.target.checked, (checked) => setChecked(checked)));
 	};

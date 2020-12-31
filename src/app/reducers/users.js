@@ -52,7 +52,6 @@ const usersReducer = createReducer(initialState, {
         return {
             ...state,
             users: state.users.map((item) => {
-                debugger
                 if (item.id === payload.id) {
                     return ({
                         ...item,
@@ -64,7 +63,6 @@ const usersReducer = createReducer(initialState, {
         }
     },
     [USERS_ACTIONS.DELETE_USER](state, { userId }) {
-        // debugger
         return {
             ...state,
             users: state.users.filter(({ id }) => id !== userId)
